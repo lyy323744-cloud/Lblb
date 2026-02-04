@@ -11,34 +11,19 @@ body{
     font-family:Arial;
     background:#fffaf5;
 }
-h1,h2,h3{margin:10px 0}
 .container{
     max-width:1100px;
     margin:auto;
-    padding:20px;
+    padding:15px;
 }
-header{
-    text-align:center;
-    margin-bottom:20px;
-}
-header h1{
-    color:#ff7a00;
-}
-.warning{
-    color:#ff7a00;
-    font-size:18px;
-    animation:pulse 1.5s infinite;
-}
-@keyframes pulse{
-    0%,100%{transform:scale(1)}
-    50%{transform:scale(1.05)}
-}
+header{text-align:center}
+header h1{color:#ff7a00}
 
-/* countdown */
 .countdown{
     display:flex;
     justify-content:center;
     gap:10px;
+    margin-bottom:15px;
 }
 .time-box{
     background:#ff7a00;
@@ -48,22 +33,21 @@ header h1{
     width:60px;
 }
 
-/* layout */
 .main{
     display:flex;
     gap:20px;
-    flex-wrap:wrap;
 }
-.slider, .form-box{
+@media(max-width:768px){
+    .main{flex-direction:column;}
+}
+
+.slider{
+    flex:1;
     background:#fff;
     border-radius:20px;
     box-shadow:0 0 15px rgba(255,122,0,.3);
-    padding:20px;
-}
-.slider{
-    flex:1;
+    padding:15px;
     position:relative;
-    overflow:hidden;
 }
 .slider img{
     width:100%;
@@ -71,6 +55,7 @@ header h1{
     border-radius:15px;
 }
 .slider img.active{display:block}
+
 .arrow{
     position:absolute;
     top:50%;
@@ -81,38 +66,42 @@ header h1{
     border-radius:50%;
     width:40px;
     height:40px;
-    cursor:pointer;
 }
 .arrow.left{left:10px}
 .arrow.right{right:10px}
 
 .form-box{
     flex:1;
+    background:#fff;
+    border-radius:20px;
+    box-shadow:0 0 15px rgba(255,122,0,.3);
+    padding:15px;
 }
-.input, select{
+input,select{
     width:100%;
     padding:12px;
-    margin-bottom:12px;
+    margin-bottom:10px;
     border-radius:12px;
     border:2px solid #ff7a00;
 }
-.input:hover{transform:scale(1.02)}
 
-.options{
+.qty-box{
     display:flex;
-    gap:10px;
-}
-.option{
-    flex:1;
+    align-items:center;
+    justify-content:space-between;
     border:2px solid #ff7a00;
-    border-radius:15px;
+    border-radius:12px;
     padding:10px;
-    text-align:center;
-    cursor:pointer;
+    margin-bottom:10px;
 }
-.option.active{
+.qty-box button{
     background:#ff7a00;
     color:#fff;
+    border:none;
+    border-radius:50%;
+    width:35px;
+    height:35px;
+    font-size:20px;
 }
 
 .price{
@@ -121,7 +110,7 @@ header h1{
     margin:10px 0;
 }
 
-button{
+button.order{
     width:100%;
     padding:15px;
     background:#ff7a00;
@@ -129,13 +118,12 @@ button{
     border:none;
     border-radius:20px;
     font-size:18px;
-    cursor:pointer;
 }
 
 .success{
     display:none;
     text-align:center;
-    margin-top:20px;
+    margin-top:15px;
 }
 .check{
     width:60px;
@@ -156,6 +144,31 @@ button{
     top:10px;
     left:20px;
 }
+
+/* contact buttons */
+.contact-box{
+    position:fixed;
+    bottom:20px;
+    right:20px;
+    text-align:center;
+}
+.contact-box p{
+    font-size:14px;
+    margin-bottom:5px;
+}
+.contact-btn{
+    display:block;
+    width:60px;
+    height:60px;
+    margin:5px auto;
+    border-radius:50%;
+    background:#ff7a00;
+    color:#fff;
+    font-size:30px;
+    line-height:60px;
+    text-decoration:none;
+}
+.whatsapp{background:#25D366}
 </style>
 </head>
 
@@ -165,76 +178,85 @@ button{
 
 <header>
 <h1>sahla dz – آمنة وسريعة</h1>
-<h3>مدة التخفيض</h3>
 <div class="countdown">
-<div class="time-box" id="h">48</div>
-<div class="time-box" id="m">00</div>
-<div class="time-box" id="s">00</div>
+<div class="time-box">48</div>
+<div class="time-box">00</div>
+<div class="time-box">00</div>
 </div>
-<p class="warning">الرجاء مراجعة معلوماتك قبل الضغط على الطلب</p>
 </header>
 
 <div class="main">
 
-<!-- slider -->
 <div class="slider">
-<img src="IMG_20260203_212104_856.jpg" class="active">
-<img src="IMG_20260203_212104_857.jpg">
-<img src="IMG_20260203_212105_021.jpg">
-<img src="IMG_20260203_212104_576.jpg">
+<img src="IMG_20260203_212104_857.jpg" class="active">
+<img src="IMG_20260203_212104_856.jpg">
 <img src="IMG_20260203_212104_794.jpg">
+<img src="IMG_20260203_212105_021.jpg">
+<img src="img5.jpg">
 <button class="arrow left" onclick="prev()">‹</button>
 <button class="arrow right" onclick="next()">›</button>
 </div>
 
-<!-- form -->
 <div class="form-box">
-<input class="input" placeholder="الاسم">
-<input class="input" placeholder="اللقب">
-<input class="input" placeholder="رقم الهاتف">
 
-<h3>اختر الحجم</h3>
-<div class="options">
-<div class="option active" onclick="sizeSelect(1600,this)">صغير</div>
-<div class="option" onclick="sizeSelect(2300,this)">كبير</div>
+<input placeholder="الاسم">
+<input placeholder="اللقب">
+<input placeholder="رقم الهاتف">
+
+<h3>حجم صغير (1600 دج)</h3>
+<div class="qty-box">
+<button onclick="change('s',-1)">−</button>
+<span id="qs">0</span>
+<button onclick="change('s',1)">+</button>
 </div>
 
-<h3>الكمية</h3>
-<input type="number" class="input" id="qty" value="1" min="1" onchange="calc()">
+<h3>حجم كبير (2300 دج)</h3>
+<div class="qty-box">
+<button onclick="change('l',-1)">−</button>
+<span id="ql">0</span>
+<button onclick="change('l',1)">+</button>
+</div>
 
 <h3>نوع التوصيل</h3>
-<div class="options">
-<div class="option active" onclick="shipSelect(400,this)">منزل</div>
-<div class="option" onclick="shipSelect(600,this)">مكتب</div>
-</div>
-
-<select class="input">
-<option>اختر الولاية</option>
-<option>01 - أدرار</option><option>02 - الشلف</option><option>03 - الأغواط</option>
-<option>04 - أم البواقي</option><option>05 - باتنة</option><option>06 - بجاية</option>
-<option>07 - بسكرة</option><option>08 - بشار</option><option>09 - البليدة</option>
-<option>10 - البويرة</option><option>11 - تمنراست</option><option>12 - تبسة</option>
-<option>13 - تلمسان</option><option>14 - تيارت</option><option>15 - تيزي وزو</option>
-<option>16 - الجزائر</option><option>17 - الجلفة</option><option>18 - جيجل</option>
-<option>19 - سطيف</option><option>20 - سعيدة</option><option>21 - سكيكدة</option>
-<option>22 - سيدي بلعباس</option><option>23 - عنابة</option><option>24 - قالمة</option>
-<option>25 - قسنطينة</option><option>26 - المدية</option><option>27 - مستغانم</option>
-<option>28 - المسيلة</option><option>29 - معسكر</option><option>30 - ورقلة</option>
-<option>31 - وهران</option><option>32 - البيض</option><option>33 - إليزي</option>
-<option>34 - برج بوعريريج</option><option>35 - بومرداس</option><option>36 - الطارف</option>
-<option>37 - تندوف</option><option>38 - تيسمسيلت</option><option>39 - الوادي</option>
-<option>40 - خنشلة</option><option>41 - سوق أهراس</option><option>42 - تيبازة</option>
-<option>43 - ميلة</option><option>44 - عين الدفلى</option><option>45 - النعامة</option>
-<option>46 - عين تموشنت</option><option>47 - غرداية</option><option>48 - غليزان</option>
-<option>49 - تيميمون</option><option>50 - برج باجي مختار</option><option>51 - أولاد جلال</option>
-<option>52 - بني عباس</option><option>53 - عين صالح</option><option>54 - عين قزام</option>
-<option>55 - تقرت</option><option>56 - جانت</option><option>57 - المغير</option>
-<option>58 - المنيعة</option>
+<select id="ship" onchange="calc()">
+<option value="400">توصيل للمنزل – 400 دج</option>
+<option value="600">توصيل للمكتب – 600 دج</option>
 </select>
 
-<div class="price">السعر الإجمالي: <span id="total">1600</span> دج</div>
+<h3>الولاية</h3>
+<select id="wilaya">
+<option>اختر الولاية</option>
+<option>01 أدرار</option><option>02 الشلف</option><option>03 الأغواط</option>
+<option>04 أم البواقي</option><option>05 باتنة</option><option>06 بجاية</option>
+<option>07 بسكرة</option><option>08 بشار</option><option>09 البليدة</option>
+<option>10 البويرة</option><option>11 تمنراست</option><option>12 تبسة</option>
+<option>13 تلمسان</option><option>14 تيارت</option><option>15 تيزي وزو</option>
+<option>16 الجزائر</option><option>17 الجلفة</option><option>18 جيجل</option>
+<option>19 سطيف</option><option>20 سعيدة</option>
+<option>21 سكيكدة</option><option>22 سيدي بلعباس</option>
+<option>23 عنابة</option><option>24 قالمة</option><option>25 قسنطينة</option>
+<option>26 المدية</option><option>27 مستغانم</option>
+<option>28 المسيلة</option><option>29 معسكر</option>
+<option>30 ورقلة</option><option>31 وهران</option>
+<option>32 البيض</option><option>33 إليزي</option>
+<option>34 برج بوعريريج</option><option>35 بومرداس</option>
+<option>36 الطارف</option><option>37 تندوف</option>
+<option>38 تيسمسيلت</option>
+<option>39 الوادي</option><option>40 خنشلة</option>
+<option>41 سوق أهراس</option><option>42 تيبازة</option>
+<option>43 ميلة</option><option>44 عين الدفلى</option>
+<option>45 النعامة</option><option>46 عين تموشنت</option>
+<option>47 غرداية</option><option>48 غليزان</option>
+<option>49 تيميمون</option><option>50 برج باجي مختار</option>
+<option>51 أولاد جلال</option><option>52 بني عباس</option>
+<option>53 عين صالح</option><option>54 عين قزام</option>
+<option>55 تقرت</option><option>56 جانت</option>
+<option>57 المغير</option><option>58 المنيعة</option>
+</select>
 
-<button onclick="order()">اطلب الآن</button>
+<div class="price">السعر الإجمالي: <span id="total">0</span> دج</div>
+
+<button class="order" onclick="order()">اطلب الآن</button>
 
 <div class="success" id="success">
 <div class="check"></div>
@@ -245,28 +267,33 @@ button{
 </div>
 </div>
 
+<div class="contact-box">
+<p>أو يمكنك الاتصال بنا مباشرة</p>
+<a class="contact-btn" href="tel:0555555555">📞</a>
+<a class="contact-btn whatsapp" href="https://wa.me/213555555555">🟢</a>
+</div>
+
 <script>
-let imgs=document.querySelectorAll('.slider img');
-let i=0;
+let imgs=document.querySelectorAll('.slider img'),i=0;
 function show(){imgs.forEach(x=>x.classList.remove('active'));imgs[i].classList.add('active')}
 function next(){i=(i+1)%imgs.length;show()}
 function prev(){i=(i-1+imgs.length)%imgs.length;show()}
 
-let price=1600, ship=400;
-function sizeSelect(p,el){
-document.querySelectorAll('.options')[0].querySelectorAll('.option').forEach(o=>o.classList.remove('active'));
-el.classList.add('active'); price=p; calc();
-}
-function shipSelect(s,el){
-document.querySelectorAll('.options')[1].querySelectorAll('.option').forEach(o=>o.classList.remove('active'));
-el.classList.add('active'); ship=s; calc();
+let qs=0,ql=0;
+function change(t,v){
+ if(t==='s') qs=Math.max(0,qs+v);
+ else ql=Math.max(0,ql+v);
+ document.getElementById('qs').innerText=qs;
+ document.getElementById('ql').innerText=ql;
+ calc();
 }
 function calc(){
-let q=document.getElementById('qty').value;
-document.getElementById('total').innerText=price*q+ship;
+ let ship=+document.getElementById('ship').value;
+ let total=qs*1600+ql*2300+ship;
+ document.getElementById('total').innerText=total;
 }
 function order(){
-document.getElementById('success').style.display='block';
+ document.getElementById('success').style.display='block';
 }
 </script>
 
